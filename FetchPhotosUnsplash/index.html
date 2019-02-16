@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>	</title>
+  <link rel="stylesheet" href="main.css">
+</head>
+<body>
+	<template id="pagination-template">
+    <div class="pagination">
+      <div class="pagination__left"><button v-bind:disabled="hasPrev()" @click="changePage(prevPage)">Предыдущая</button></div>
+      <!-- <div class="pagination__left">{{ current }} изи {{ totalPages }}</div> -->
+      <div class="pagination__mid"><button v-for="page in pages" @click="changePage(page)" :class="{ current: current == page}">{{ page }}</button></div>
+
+      <div class="pagination__right"><button v-bind:disabled="hasNext()" @click="changePage(nextPage)">Следующая</button></div>
+    </div>
+  </template>
+
+  <div id="app">
+
+    <pagination 
+    :current="currentPage" 
+    :total="totalPhotos"
+    :perPage="perPage"
+    @page-change="fetchPhotos">
+      
+    </pagination>
+     <section class="grid">
+       <div class="grid_item" v-for="photo in photos">
+        <img class="mainimg" :src="photo.urls.small" alt="">
+         <div class="info">
+          <div class="author">
+            <a :href="photo.user.portfolio_url"><img :src="photo.user.profile_image.large" class="author_photo" alt=""></a>
+            <span class="username">{{ photo.user.name }}</span>
+          </div>
+         </div>
+       </div>
+     </section>
+  </div>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.17/vue.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-resource/1.5.1/vue-resource.js"></script>
+  <script src="pagination.js"></script>
+	<script src="unsplash.js"></script>
+</body>
+</html>
