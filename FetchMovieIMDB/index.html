@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="description" content="Смореть случаный фильм RSPWN">
+  <meta name="keywords" content="Смореть,случаный,филь,RSPWN">
+  <meta name="author" content="RSPWN">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="main.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+	
+  <div id="app">
+    <div class="loading" v-if="loading"><i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+<span class="sr-only">Loading...</span></div>
+<!-- {{selected_genre}} -->
+<div class="container animated bounceIn"> 
+  <div class="movie"> 
+        <div class="movie__item" v-for="movie in MoviesList">
+          <transition 
+           appear
+           name="fade">
+      <img :src="poster" alt="">
+    </transition>
+  <div class="movie__info"> 
+    <div class="movie__info__title">  
+    <!-- {{ movie.original_title}} -->
+  <h1>{{ title }}</h1>
+
+</div>
+<div class="movie__info__overview"> 
+    {{ overview }}
+    <div class="movie__info__info"> 
+
+    </div>
+</div>
+  </div>
+  </div>
+  <button class="random" @click="getrandomfilm">Мне повезет</button>
+</div>
+   
+</div>
+
+
+   
+  
+  	
+ 
+  </div>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.17/vue.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
+<script src="random.js"></script>
+
+
+</body>
+</html>
