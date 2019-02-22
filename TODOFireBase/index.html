@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+    <link rel="stylesheet" href="todo.css">
+</head>
+<body>
+
+    <div id="app">
+        <input class="input edit" ref="edit" type="text" v-model="editMsg" v-if="isEditing" @keyup.enter="confirmEdit()">
+        <input class="input" type="text" v-model="message" v-else="isEditing" @keyup.enter="addItem">
+        <div class="todos">
+        <transition-group name="list" tag="p">
+            <div class="todo" v-for="(item,id) in todos" :key="item.id" :data-id="item.id" :class="{ 'complete' : item.isComplete }" @click.stop.prevent="isComplete(item)">{{ item.text }}<div class="btns">
+                <button class="edit" @click.stop.prevent="editItem(item)"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+                <button class="delete" @click.stop.prevent="deleteItem(item)"><i class="fa fa-trash" aria-hidden="true"></i></button>
+            </div>
+        </transition-group>
+        </div>
+        </div>
+        <button class="btnClear" @click="clearAllData()">Clear All Data</button>
+    </div>
+
+
+    <script src="https://www.gstatic.com/firebasejs/5.8.3/firebase.js"></script>
+    <script>
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyC3tWHsblHlAbyTYeqgZuPsDZa4tQUGg-Y",
+        authDomain: "todos-firebase-c072a.firebaseapp.com",
+        databaseURL: "https://todos-firebase-c072a.firebaseio.com",
+        projectId: "todos-firebase-c072a",
+        storageBucket: "todos-firebase-c072a.appspot.com",
+        messagingSenderId: "745242060431"
+      };
+      firebase.initializeApp(config);
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="todo.js"></script>
+</body>
+</html>
