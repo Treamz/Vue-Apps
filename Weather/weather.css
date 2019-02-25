@@ -1,0 +1,115 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #D3959B;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #BFE6BA, #D3959B);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #BFE6BA, #D3959B); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.weather__wrapper {
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 0 20px #222;
+    color:#fff;
+    position: relative;
+    width: 400px;
+    background: url('https://blog.spoongraphics.co.uk/wp-content/uploads/2015/11/thumbnail9.jpg') no-repeat;
+    background-size: cover;
+    height: 250px;
+    padding: 10px;
+    background-color: #222;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+.weather__wrapper:after {
+    content: '';
+    background: #222;
+    display: block;
+    opacity: .5;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    transition: all .4s ease-in-out;
+}
+.weather__wrapper:hover:after {
+    opacity: .3;
+}
+
+.weather__left, .weather__right {
+    position: relative;
+    z-index: 1;
+    height: 100%;
+}
+.weather__left {
+    flex: 1 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.weather__left > .city {
+    font-size: 36px;
+}
+
+.weather__left > .bottom {
+    padding-right: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.weather__left .temp {
+    font-size: 48px;
+}
+.weather__right {
+    box-shadow: inset 0 0 68px #222;
+    border: 1px solid rgba(255,255,255,.2);
+    flex: 1 30%;
+    background-color: rgba(0,0,0,.5);
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.weather__title {
+    font-size: 24px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.weather__desc {
+    font-size: 18px;
+    text-align: center;
+    text-transform: capitalize;
+    margin-bottom: 10px;
+}
+
+.windspeed, .sunset, .sunrise {
+    margin: 5px 0;
+}
+
+.time {
+    font-size: 18px;
+}
+.day {
+    font-size: 16px;
+}
+
+@media (max-width: 768px) {
+    .weather__wrapper {
+        width: auto;
+    }
+}
