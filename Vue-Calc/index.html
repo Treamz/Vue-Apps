@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+    <link rel="stylesheet" href="calc.css">
+</head>
+<body>
+
+
+    <div id="app">
+        <div class="info">{{current || '0' }}</div>
+        <div @click="clear()" class="btn-num clear">C</div>
+        <div @click="sign()" class="btn-num clear">-/+</div>
+        <div @click="percent()" class="btn-num clear">%</div>
+        <div @click="divide()" class="btn-num operators">÷</div>
+        <div @click="append(7)" class="btn-num blacked">7</div>
+        <div @click="append(8)" class="btn-num blacked">8</div>
+        <div @click="append(9)" class="btn-num blacked">9</div>
+        <div @click="times()" class="btn-num operators">X</div>
+        <div @click="append(4)" class="btn-num blacked">4</div>
+        <div @click="append(5)" class="btn-num blacked">5</div>
+        <div @click="append(6)" class="btn-num blacked">6</div>
+        <div @click="minus()" class="btn-num operators">-</div>
+        <div @click="append(1)" class="btn-num blacked">1</div>
+        <div @click="append(2)" class="btn-num blacked">2</div>
+        <div @click="append(3)" class="btn-num blacked">3</div>
+        <div @click="plus()" class="btn-num operators">+</div>
+        <div @click="append(0)" class="btn-num zero blacked">0</div>
+        <div @click="dot()" class="btn-num blacked">.</div>
+        <div @click="equal()" class="btn-num operators">=</div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="calc.js"></script>
+</body>
+</html>
