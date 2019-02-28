@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+    crossorigin="anonymous">
+  <link rel="stylesheet" href="main.css">
+  <title>Hello, world!</title>
+</head>
+
+<body>
+  <div id="app">
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="#">Dashboard</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+          
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav mr-auto">
+
+                <li v-if="!isAuthorized" class="nav-item active">
+                  <a class="nav-link" href="#" @click="changeView('login')">Login</a>
+                </li>
+                <li class="nav-item"  v-if="!isAuthorized">
+                  <a class="nav-link" href="#" @click="changeView('register')">Register</a>
+                </li>
+                <li class="nav-item dropdown" v-if="isAuthorized">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      {{ user.email }}
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="#">Settings</a>
+                    <div class="dropdown-divider"></div>
+                    <a @click="logOut()" class="dropdown-item" href="#">Log out</a>
+                  </div>
+                </li>
+              </ul>
+
+            </div>
+          </nav>
+      <nav>
+      </nav>
+    </header>
+    <div class="container">
+      <!-- <login v-if="sign === 'sign-in'"></login>
+      <register v-else @regSuccess="sign = $event"></register> -->
+      <transition name="slide-fade" appear>
+        <component class="block" :is="currentView" @is-auth="changeView"></component>
+      </transition>
+    </div>
+  </div>
+
+
+  <template id="register-template">
+    <form @submit.prevent="registerUser">
+      <div class="form-group">
+        <label for="exampleInputEmail1">Email address</label>
+        <input type="email" class="form-control" id="exampleInputEmail1" required aria-describedby="emailHelp" placeholder="Enter email" v-model="user.email">
+        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+      </div>
+      <div class="form-group">
+        <label for="exampleInputPassword1">Password</label>
+        <input type="password" class="form-control" required placeholder="Password" v-model="user.password">
+      </div>
+      <div class="form-group">
+        <label for="exampleInputPassword1">Re-Password</label>
+        <input type="password" class="form-control" required placeholder="Password" v-model="user.confirmPassword">
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+
+      <div class="alert alert-danger mt-5" role="alert" v-if="checkAuth">
+        This is a danger alert—check it out!
+      </div>
+      
+    </form>
+    <!-- <button @click="test">test</button> -->
+  </template>
+
+  <template id="login-template">
+      <form @submit.prevent="loginUser">
+          <div class="form-group">
+            <label for="exampleInputEmail1">Email address</label>
+            <input type="email" class="form-control" id="exampleInputEmail1" required aria-describedby="emailHelp" placeholder="Enter email" v-model="user.email">
+            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword1">Password</label>
+            <input type="password" class="form-control" required placeholder="Password" v-model="user.password">
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+    
+          <div class="alert alert-danger mt-5" role="alert" v-if="checkAuth">
+            This is a danger alert—check it out!
+          </div>
+          
+        </form>
+  </template>
+
+  <template id="movies-template">
+    <div class="list">
+        {{ msg }}
+    </div>
+  </template>
+  <!-- Optional JavaScript -->
+  <script src="https://www.gstatic.com/firebasejs/5.8.4/firebase.js"></script>
+  <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyC3tWHsblHlAbyTYeqgZuPsDZa4tQUGg-Y",
+      authDomain: "todos-firebase-c072a.firebaseapp.com",
+      databaseURL: "https://todos-firebase-c072a.firebaseio.com",
+      projectId: "todos-firebase-c072a",
+      storageBucket: "todos-firebase-c072a.appspot.com",
+      messagingSenderId: "745242060431"
+    };
+    firebase.initializeApp(config);
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+
+
+
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+  <script src="main.js"></script>
+</body>
+
+</html>
